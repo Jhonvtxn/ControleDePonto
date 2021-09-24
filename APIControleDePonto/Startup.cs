@@ -1,4 +1,5 @@
 using APIControleDePonto.Configure;
+using CrossCutting;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,9 +28,9 @@ namespace APIControleDePonto
         
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddAutoMapperConfig();
+            services.AddAutoMapperConfig();
             services.AddDatabaseConfig(Configuration);
-            //services.AddDependencyInjectionConfig();
+            services.AddDependencyInjectionConfig();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
