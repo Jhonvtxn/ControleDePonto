@@ -14,18 +14,16 @@ namespace WebAPI.Controllers
     [ApiController]
     public class SchedulesController : ControllerBase
     {
-        private IBaseService<Schedules> _baseScheduleService;
-        private ISchedulesService _Scheduleservice;
+        private IBaseService<Schedules> _baseSchedulesService;
+        private ISchedulesService _Schedulesservice;
 
 
-        public SchedulesController(IBaseService<Schedules> baseScheduleService
-            , ISchedulesService ScheduleAplicattionService)
+        public SchedulesController(IBaseService<Schedules> baseSchedulesService
+            , ISchedulesService SchedulesService)
         {
-            _baseScheduleService = baseScheduleService;
-            _Scheduleservice = ScheduleAplicattionService;
+            _baseSchedulesService = baseSchedulesService;
+            _Schedulesservice = SchedulesService;
         }
-
-
 
         [HttpPut]
         public IActionResult Update([FromBody] Schedules schedule)
@@ -33,7 +31,7 @@ namespace WebAPI.Controllers
             if (schedule == null)
                 return NotFound();
 
-            return Execute(() => _baseScheduleService.Update<SchedulesValidator>(schedule));
+            return Execute(() => _baseSchedulesService.Update<SchedulesValidator>(schedule));
         }
 
         [HttpDelete("{id}")]
@@ -44,7 +42,7 @@ namespace WebAPI.Controllers
 
             Execute(() =>
             {
-                _baseScheduleService.Delete(id);
+                _baseSchedulesService.Delete(id);
                 return true;
             });
 
@@ -57,13 +55,43 @@ namespace WebAPI.Controllers
             if (schedule == null)
                 return NotFound();
 
-            return Execute(() => _baseScheduleService.Add<SchedulesValidator>(schedule).Id);
+            return Execute(() => _baseSchedulesService.Add<SchedulesValidator>(schedule).Id);
+        }
+
+        [HttpPost]
+        [Route("AutoSchedule")]
+        public IActionResult AutoSchedule(int id, int adtype)
+        {
+            var auto_schedule = new Schedules();
+            auto_schedule.CollaboratorId = id;
+
+            if (adtype == 1)
+            {
+                auto_schedule.Entry = DateTime.Now;
+                return Execute(() => _baseSchedulesService.Add<SchedulesValidator>(auto_schedule).Id);
+            }
+            else if (adtype == 2)
+            {
+                auto_schedule.LunchTime = DateTime.Now;
+                return Execute(() => _baseSchedulesService.Update<SchedulesValidator>(auto_schedule).Id);
+            }
+            else if (adtype == 3)
+            {
+                auto_schedule.ReturnLunchTime = DateTime.Now;
+                return Execute(() => _baseSchedulesService.Update<SchedulesValidator>(auto_schedule).Id);
+            }
+            else {
+
+                auto_schedule.DepartureTime = DateTime.Now;
+                return Execute(() => _baseSchedulesService.Update<SchedulesValidator>(auto_schedule).Id);
+                
+            }
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            return Execute(() => _Scheduleservice.GetAll());
+            return Execute(() => _Schedulesservice.GetAll());
         }
 
         [HttpGet("{id}")]
@@ -72,7 +100,27 @@ namespace WebAPI.Controllers
             if (id == 0)
                 return NotFound();
 
-            return Execute(() => _baseScheduleService.GetById(id));
+            return Execute(() => _baseSchedulesService.GetById(id));
+        }
+
+        [HttpGet]
+        [Route("CollaboratorSchedules")]
+        public IActionResult GetSchedulesByUser(int id)
+        {
+            if (id == 0)
+                return NotFound();
+
+            return Execute(() => _Schedulesservice.GetSchedulesByUserId(id));
+        }
+
+        [HttpPost]
+        [Route("CheckEntry")]
+        public IActionResult BeatTime(int id)
+        {
+            if (id == 0)
+                return NotFound();
+
+            return Execute(() => _Schedulesservice.BeatTime(id));
         }
 
         private IActionResult Execute(Func<object> func)

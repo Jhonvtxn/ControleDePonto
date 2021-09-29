@@ -15,7 +15,7 @@ namespace Service.Validators
             RuleFor(c => c.CNPJ)
                .NotEmpty().WithMessage("Please enter the CNPJ.")
                .NotNull().WithMessage("Please enter the CNPJ.")
-               .MinimumLength(14).WithMessage("O tamanho minimo é de 11 caracteres");
+               .MinimumLength(14).WithMessage("O tamanho minimo é de 14 caracteres");
 
             RuleFor(c => c.Name)
                .NotEmpty().WithMessage("Please enter the name.")

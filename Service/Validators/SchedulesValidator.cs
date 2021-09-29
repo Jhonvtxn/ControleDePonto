@@ -12,21 +12,21 @@ namespace Service.Validators
     {
         public SchedulesValidator()
         {
-            RuleFor(c => c.Entry)
-               .NotEmpty().WithMessage("Please enter the Entry Time.")
-               .NotNull().WithMessage("Please enter the Entry Time.");
+            //RuleFor(c => c.Entry)
+              // .NotEmpty().WithMessage("Please enter the Entry Time.")
+               //.NotNull().WithMessage("Please enter the Entry Time.");
 
-            RuleFor(c => c.LunchTime)
-                    .NotEmpty().WithMessage("Please enter the Lunch Time.")
-                    .NotNull().WithMessage("Please enter the Lunch Time.");
+            //RuleFor(c => c.LunchTime)
+                   // .NotEmpty().WithMessage("Please enter the Lunch Time.")
+                    //.NotNull().WithMessage("Please enter the Lunch Time.");
 
-            RuleFor(c => c.ReturnLunchTime)
-                    .NotEmpty().WithMessage("Please enter the Lunch Return Time.")
-                    .NotNull().WithMessage("Please enter the Lunch Return Time.");
+            //RuleFor(c => c.ReturnLunchTime)
+              //      .NotEmpty().WithMessage("Please enter the Lunch Return Time.")
+                //    .NotNull().WithMessage("Please enter the Lunch Return Time.");
 
-            RuleFor(c => c.DepartureTime)
-                    .NotEmpty().WithMessage("Please enter the Departure Time.")
-                    .NotNull().WithMessage("Please enter the Departure Time.");
+            //RuleFor(c => c.DepartureTime)
+             //       .NotEmpty().WithMessage("Please enter the Departure Time.")
+               //     .NotNull().WithMessage("Please enter the Departure Time.");
 
         }
     }

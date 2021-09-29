@@ -22,10 +22,10 @@ namespace WebAPI.Controllers
         private readonly ILogger<CollaboratorController> _logger;
 
         public CollaboratorController(IBaseService<Collaborator> baseCollaboratorService
-            , ICollaboratorService CollaboratorAplicattionService, ILogger<CollaboratorController> logger)
+            , ICollaboratorService CollaboratorService, ILogger<CollaboratorController> logger)
         {
             _baseCollaboratorService = baseCollaboratorService;
-            _collaboratorservice = CollaboratorAplicattionService;
+            _collaboratorservice = CollaboratorService;
             _logger = logger;
         }
 
@@ -98,7 +98,7 @@ namespace WebAPI.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Execute(() => _baseCollaboratorService.Get());
+            return Execute(() => _collaboratorservice.GetAll());
         }
 
         [HttpGet("{id}")]

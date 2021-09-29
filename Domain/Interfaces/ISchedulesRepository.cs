@@ -10,5 +10,11 @@ namespace Domain.Interfaces
     public interface ISchedulesRepository
     {
         IEnumerable<Schedules> GetAll();
+
+        IEnumerable<Schedules> GetSchedulesByUserId(int id);
+
+        Schedules CheckEntry(int id);
+
+        double total_hours_worked(int id);
     }
 }

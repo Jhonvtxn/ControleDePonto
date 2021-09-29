@@ -11,5 +11,9 @@ namespace Service.Interfaces
     public interface ISchedulesService
     {
         IEnumerable<SchedulesViewModel> GetAll();
+
+        IEnumerable<SchedulesViewModel> GetSchedulesByUserId(int id);
+
+        SchedulesViewModel BeatTime(int idUser);
     }
 }

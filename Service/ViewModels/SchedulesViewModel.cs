@@ -17,7 +17,7 @@ namespace Service.ViewModels
 
         public DateTime DepartureTime { get; set; }
 
-        public int ColaboratorId { get; set; }
+        public int CollaboratorId { get; set; }
 
         public Collaborator Collaborator { get; set; }
 

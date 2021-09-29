@@ -18,9 +18,40 @@ namespace Data.Repository
         public IEnumerable<Schedules> GetAll()
         {
             var obj = CurrentSet
-                       .Include(x => x.Collaborator).ToList();
+                       .Include(x => x.Collaborator)
+                       .ToList();
 
             return obj;
+        }
+        public IEnumerable<Schedules> GetSchedulesByUserId(int id)
+        {
+            var obj = CurrentSet.AsNoTracking()
+                .Include(x => x.Collaborator)
+                .Where(x => x.CollaboratorId == id)
+                .ToList();
+
+            return obj;
+        }
+
+        public Schedules CheckEntry(int id)
+        {
+            var obj = CurrentSet.AsNoTracking()
+                .Include(x => x.Collaborator)
+                .Where(x => x.CollaboratorId == id && (x.Entry.Date <= DateTime.Today) )
+                .FirstOrDefault();
+
+            return obj;
+        }
+
+        public double total_hours_worked(int id)
+        {
+            var total = new Schedules();
+            total.CollaboratorId = id;
+            TimeSpan result;
+
+            result = (total.DepartureTime - total.Entry) - (total.ReturnLunchTime - total.LunchTime);
+            return result.Hours;
+
         }
     }
 }

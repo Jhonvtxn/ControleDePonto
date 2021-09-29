@@ -37,6 +37,15 @@ namespace WebAPI.Controllers
             return Execute(() => _baseCompanyService.Update<CompanyValidator>(company));
         }
 
+        [HttpPost]
+        public IActionResult Create([FromBody] Company company)
+        {
+            if (company == null)
+                return NotFound();
+
+            return Execute(() => _baseCompanyService.Add<CompanyValidator>(company).Id);
+        }
+
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

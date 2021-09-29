@@ -31,7 +31,7 @@ namespace Service.Validators
                     .MinimumLength(8).WithMessage("O tamanho minimo é de 08 caracteres")
                     .Matches(@"[A-Z]+").WithMessage("Sua senha deve conter pelo menos uma letra maiúscula.")
                     .Matches(@"[a-z]+").WithMessage("Your password must contain at least one lowercase letter.")
-                    .Matches(@"[0-9]+").WithMessage("Sua senha deve conter pelo menos uma letra minúscula.")
+                    .Matches(@"[0-9]+").WithMessage("Sua senha deve conter pelo menos um Numero(0-9).")
                     .Matches(@"[!?*.@#-!]+").WithMessage("Sua senha deve conter pelo menos um (!? *.).");
 
             RuleFor(c => c.Phone)

@@ -9,6 +9,7 @@ namespace Service.Interfaces
 { 
     public interface ICollaboratorService
     {
+        IEnumerable<CollaboratorViewModel> GetAll();
         CollaboratorViewModel GetAllAuthentication(string emailAut, string PasswordAut);
     }
 }

@@ -21,6 +21,8 @@ namespace CrossCutting
             services.AddScoped(typeof(ICollaboratorService), typeof(CollaboratorService));
             services.AddScoped(typeof(ICompanyRepository), typeof(CompanyRepository));
             services.AddScoped(typeof(ICompanyService), typeof(CompanyService));
+            services.AddScoped(typeof(ISchedulesRepository), typeof(SchedulesRepository));
+            services.AddScoped(typeof(ISchedulesService), typeof(SchedulesService));
         }
     }
 }
