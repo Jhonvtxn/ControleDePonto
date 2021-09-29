@@ -68,24 +68,22 @@ namespace WebAPI.Controllers
             if (adtype == 1)
             {
                 auto_schedule.Entry = DateTime.Now;
-                return Execute(() => _baseSchedulesService.Add<SchedulesValidator>(auto_schedule).Id);
+                
             }
             else if (adtype == 2)
             {
                 auto_schedule.LunchTime = DateTime.Now;
-                return Execute(() => _baseSchedulesService.Update<SchedulesValidator>(auto_schedule).Id);
             }
             else if (adtype == 3)
             {
                 auto_schedule.ReturnLunchTime = DateTime.Now;
-                return Execute(() => _baseSchedulesService.Update<SchedulesValidator>(auto_schedule).Id);
             }
             else {
 
                 auto_schedule.DepartureTime = DateTime.Now;
-                return Execute(() => _baseSchedulesService.Update<SchedulesValidator>(auto_schedule).Id);
                 
             }
+            return Execute(() => _baseSchedulesService.Add<SchedulesValidator>(auto_schedule).Id);
         }
 
         [HttpGet]
@@ -114,7 +112,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        [Route("CheckEntry")]
+        [Route("BeatTime")]
         public IActionResult BeatTime(int id)
         {
             if (id == 0)

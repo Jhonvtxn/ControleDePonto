@@ -52,7 +52,7 @@ namespace Service.Services
             else
             {
                 objcheck.DepartureTime = DateTime.Now;
-                objcheck.WorkedHours = total_hours_worked(objcheck).ToString();
+                objcheck.WorkedHours = total_hours_worked(objcheck);
                 _baseRepository.Update(objcheck);
                 return _mapper.Map<SchedulesViewModel>(objcheck);
             }
