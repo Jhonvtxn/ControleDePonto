@@ -79,5 +79,25 @@ namespace Service.Services
             var objviewmodel = _mapper.Map<IEnumerable<SchedulesViewModel>>(obj);
             return objviewmodel;
         }
+
+        public SchedulesViewModel GetSchedulesByUserByToday(int idUser)
+        {
+            var objcheck = _schedulesRepository.CheckEntry(idUser);
+            if (objcheck == null)
+            {
+
+                var objViewModel = new SchedulesViewModel() { CollaboratorId = idUser, Entry = DateTime.Now };
+                var obj = _mapper.Map<Schedules>(objViewModel);
+                _baseRepository.Insert(obj);
+
+                return objViewModel;
+
+            }
+            else
+            {
+                return _mapper.Map<SchedulesViewModel>(objcheck);
+            }
+
+        }
     }
 }

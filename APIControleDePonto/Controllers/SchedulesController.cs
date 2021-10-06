@@ -102,6 +102,18 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
+        [Route("CollaboratorSchedulesByToday/{id}")]
+
+        public IActionResult CollaboratorSchedulesByUserByToday (int id)
+        {
+            if (id == 0)
+                return NotFound();
+
+            return Execute(() => _Schedulesservice.GetSchedulesByUserByToday(id));
+
+        }
+
+        [HttpGet]
         [Route("CollaboratorSchedules")]
         public IActionResult GetSchedulesByUser(int id)
         {

@@ -37,7 +37,7 @@ namespace Data.Repository
         {
             var obj = CurrentSet.AsNoTracking()
                 .Include(x => x.Collaborator)
-                .Where(x => x.CollaboratorId == id && (x.Entry.Date <= DateTime.Today) )
+                .Where(x => x.CollaboratorId == id && (x.Entry.Date >= DateTime.Today) )
                 .FirstOrDefault();
 
             return obj;

@@ -21,8 +21,8 @@ namespace APIControleDePonto.Configure
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.Name, collaborator.Name.ToString()),
-                    new Claim(ClaimTypes.Role, collaborator.Name.ToString()),
-                    new Claim(ClaimTypes.Country, collaborator.Company.ToString()),
+                    new Claim(ClaimTypes.Role, collaborator.Name.ToString())
+                
                 }),
                 Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
