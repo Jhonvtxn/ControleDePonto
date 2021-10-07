@@ -91,13 +91,23 @@ namespace Service.Services
                 _baseRepository.Insert(obj);
 
                 return objViewModel;
-
             }
             else
             {
                 return _mapper.Map<SchedulesViewModel>(objcheck);
             }
+        }
+
+        public IEnumerable<SchedulesViewModel> DashboardByUserId(int idUser)
+        {
+            var pastdate = DateTime.Now.AddDays(-6);
+            var todaydate = DateTime.Now;
+            var obj = _schedulesRepository.GetSchedulesByUserId(idUser);
+            var dashboarddates = obj.Where(Schedule => Schedule.Entry.Date <= todaydate && Schedule.Entry.Date >= pastdate).ToList();
+            var objviewmodel = _mapper.Map<IEnumerable<SchedulesViewModel>>(dashboarddates);
+            return objviewmodel;
 
         }
+        
     }
 }

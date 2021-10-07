@@ -17,5 +17,8 @@ namespace Service.Interfaces
         SchedulesViewModel GetSchedulesByUserByToday(int idUser);
 
         SchedulesViewModel BeatTime(int idUser);
+
+        IEnumerable<SchedulesViewModel> DashboardByUserId(int idUser);
+
     }
 }

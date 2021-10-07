@@ -123,7 +123,7 @@ namespace WebAPI.Controllers
             return Execute(() => _Schedulesservice.GetSchedulesByUserId(id));
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("BeatTime")]
         public IActionResult BeatTime(int id)
         {
@@ -132,7 +132,6 @@ namespace WebAPI.Controllers
 
             return Execute(() => _Schedulesservice.BeatTime(id));
         }
-
         private IActionResult Execute(Func<object> func)
         {
             try
