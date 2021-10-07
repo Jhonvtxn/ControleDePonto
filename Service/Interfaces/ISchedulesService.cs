@@ -18,7 +18,8 @@ namespace Service.Interfaces
 
         SchedulesViewModel BeatTime(int idUser);
 
-        IEnumerable<SchedulesViewModel> DashboardByUserId(int idUser);
+        IEnumerable<SchedulesViewModel> GetLast7Days(int idUser);
 
+        double balanceHours(int idUser);
     }
 }

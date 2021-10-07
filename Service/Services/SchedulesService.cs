@@ -98,7 +98,7 @@ namespace Service.Services
             }
         }
 
-        public IEnumerable<SchedulesViewModel> DashboardByUserId(int idUser)
+        public IEnumerable<SchedulesViewModel> GetLast7Days(int idUser)
         {
             var pastdate = DateTime.Now.AddDays(-6);
             var todaydate = DateTime.Now;
@@ -106,8 +106,25 @@ namespace Service.Services
             var dashboarddates = obj.Where(Schedule => Schedule.Entry.Date <= todaydate && Schedule.Entry.Date >= pastdate).ToList();
             var objviewmodel = _mapper.Map<IEnumerable<SchedulesViewModel>>(dashboarddates);
             return objviewmodel;
-
         }
-        
+        public double balanceHours(int idUser)
+        {
+            var obj = _schedulesRepository.GetSchedulesByUserId(idUser);
+            var workedHours = obj.Where(Schedules => Schedules.WorkedHours != null).ToList();
+            double balance = 0;
+
+            foreach (var hour in workedHours)
+            {
+                if (hour.WorkedHours > 8)
+                {
+                    balance = balance + (hour.WorkedHours - 8);
+                }
+                else
+                {
+                    balance = balance - (8 - hour.WorkedHours);
+                }
+            }
+            return balance;
+        }
     }
 }
