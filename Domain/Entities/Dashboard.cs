@@ -1,19 +1,17 @@
-﻿using Domain.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service.ViewModels
+namespace Domain.Entities
 {
-    public class DashboardViewModel
+    public class Dashboard : BaseEntity
     {
         public int Workload { get; set; }
 
         public double Balance { get; set; }
-
-        public IEnumerable<Schedules> Lasthours { get; set; }
 
         public int CollaboratorId { get; set; }
 

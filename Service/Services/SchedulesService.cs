@@ -57,14 +57,6 @@ namespace Service.Services
                 return _mapper.Map<SchedulesViewModel>(objcheck);
             }
         }
-        public double total_hours_worked(Schedules obj)
-        {
-            TimeSpan result;
-
-            result = (obj.DepartureTime - obj.Entry) - (obj.ReturnLunchTime - obj.LunchTime);
-            return result.Hours;
-
-        }
 
         public IEnumerable<SchedulesViewModel> GetAll()
         {
@@ -100,13 +92,21 @@ namespace Service.Services
 
         public IEnumerable<SchedulesViewModel> GetLast7Days(int idUser)
         {
-            var pastdate = DateTime.Now.AddDays(-6);
-            var todaydate = DateTime.Now;
+            var pastDate = DateTime.Now.AddDays(-6);
+            var today = DateTime.Now;
             var obj = _schedulesRepository.GetSchedulesByUserId(idUser);
-            var dashboarddates = obj.Where(Schedule => Schedule.Entry.Date <= todaydate && Schedule.Entry.Date >= pastdate).ToList();
+            var dashboarddates = obj.Where(Schedule => Schedule.Entry.Date <= today && Schedule.Entry.Date >= pastDate).ToList();
             var objviewmodel = _mapper.Map<IEnumerable<SchedulesViewModel>>(dashboarddates);
             return objviewmodel;
         }
+        public double total_hours_worked(Schedules obj)
+        {
+            TimeSpan result;
+
+            result = (obj.DepartureTime - obj.Entry) - (obj.ReturnLunchTime - obj.LunchTime);
+            return result.Hours;
+        }
+
         public double balanceHours(int idUser)
         {
             var obj = _schedulesRepository.GetSchedulesByUserId(idUser);
