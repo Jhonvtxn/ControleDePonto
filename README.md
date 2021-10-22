@@ -29,7 +29,7 @@ Necessário rodar no console do Gerenciador de Pacotes na camada de Data:
 - Add-Migration FirstMigration
 - Update-Database
 <br>
-Documentação dos codigos acima:[https://docs.microsoft.com/pt-br/ef/core/cli/powershell](https://docs.microsoft.com/pt-br/ef/core/cli/powershell)
+- Documentação dos codigos acima:[https://docs.microsoft.com/pt-br/ef/core/cli/powershell](https://docs.microsoft.com/pt-br/ef/core/cli/powershell)
 
 ## Contato
 
