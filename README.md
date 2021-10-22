@@ -30,7 +30,7 @@ Necessário rodar no console do Gerenciador de Pacotes na camada de Data:
 - Update-Database
 - Saiba mais sobres os codigos acima: [https://docs.microsoft.com/pt-br/ef/core/cli/powershell](https://docs.microsoft.com/pt-br/ef/core/cli/powershell)
 
-## Contato
+### Contato
 
 Jhonatan De Sousa Carvalho - jhonatancarv0@gmail.com
 
