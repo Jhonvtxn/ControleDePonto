@@ -21,5 +21,7 @@ namespace Service.Interfaces
         IEnumerable<SchedulesViewModel> GetLast7Days(int idUser);
 
         double balanceHours(int idUser);
+
+        IEnumerable<SchedulesViewModel> GetAllByCollaboratorIdAndYearAndMonth(int id, int year, int month);
     }
 }

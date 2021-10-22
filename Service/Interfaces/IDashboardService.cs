@@ -11,6 +11,6 @@ namespace Service.Interfaces
     {
         IEnumerable<DashboardViewModel> GetAll();
 
-        void Get_information();
+        DashboardViewModel Get_InformationCollaborator(int idUser);
     }
 }

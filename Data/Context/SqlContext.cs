@@ -15,10 +15,13 @@ namespace Data.Context
         {
 
         }
+
         public DbSet<Collaborator> Collaborators { get; set; }
         public DbSet<Company> companies { get; set; }
         public DbSet<Schedules> schedules { get; set; }
         public DbSet<Dashboard> dashboard { get; set; }
+        public DbSet<HappyFriday> happyFridays { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -27,6 +30,7 @@ namespace Data.Context
             modelBuilder.Entity<Company>(new CompanyMap().Configure);
             modelBuilder.Entity<Schedules>(new SchedulesMap().Configure);
             modelBuilder.Entity<Dashboard>(new DashboardMap().Configure);
+            modelBuilder.Entity<HappyFriday>(new HappyFridayMap().Configure);
         }
     }
 }

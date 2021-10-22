@@ -107,7 +107,7 @@ namespace WebAPI.Controllers
             if (id == 0)
                 return NotFound();
 
-            return Execute(() => _baseCollaboratorService.GetById(id));
+            return Execute(() => _collaboratorservice.GetById(id));
         }
 
         private IActionResult Execute(Func<object> func)

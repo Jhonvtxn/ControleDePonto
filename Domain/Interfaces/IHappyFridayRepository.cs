@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces
 {
-    public interface IDashboardRepository
+    public interface IHappyFridayRepository
     {
-        IEnumerable<Dashboard> GetAll();
-
-        Dashboard Get_InformationCollaborator(int idUser);
+        HappyFriday GetHappyFridayByYearAndMonthAndUserId(int idUser, int year, int month);
+        IEnumerable<HappyFriday> GetAll();
     }
 }

@@ -35,6 +35,16 @@ namespace WebAPI.Controllers
             return Execute(() => _baseDashboardService.Update<DashboardValidator>(dashboard));
         }
 
+        [HttpGet]
+        [Route("DashboardDates/{idUser}")]
+        public IActionResult DashboardDates(int idUser)
+        {
+            if (idUser == 0)
+                return NotFound();
+
+            return Execute(() => _dashboardservice.Get_InformationCollaborator(idUser));
+        }
+
         [HttpPost]
         public IActionResult Create([FromBody] Dashboard dashboard)
         {

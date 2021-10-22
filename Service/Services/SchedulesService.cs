@@ -17,16 +17,23 @@ namespace Service.Services
         private readonly ISchedulesRepository _schedulesRepository;
         private readonly IMapper _mapper;
         private readonly IBaseRepository<Schedules> _baseRepository;
-        public SchedulesService(ISchedulesRepository schedulesRepository, IMapper mapper, IBaseRepository<Schedules> baseRepository)
+        private readonly IBaseRepository<Dashboard> _baseDashboardRepository;
+        private readonly IDashboardRepository _dashboardRepository;
+        
+        public SchedulesService(ISchedulesRepository schedulesRepository, IMapper mapper, IBaseRepository<Schedules> baseRepository, IDashboardRepository dashboardRepository,
+             IBaseRepository<Dashboard> baseDashboardRepository)
         {
             _schedulesRepository = schedulesRepository;
             _mapper = mapper;
             _baseRepository = baseRepository;
+            _dashboardRepository = dashboardRepository;
+            _baseDashboardRepository = baseDashboardRepository;
         }
 
         public SchedulesViewModel BeatTime(int idUser)
         {
             var objcheck = _schedulesRepository.CheckEntry(idUser);
+            var dashboardCheck = _dashboardRepository.Get_InformationCollaborator(idUser);
             if (objcheck == null)
             {
 
@@ -52,8 +59,19 @@ namespace Service.Services
             else
             {
                 objcheck.DepartureTime = DateTime.Now;
-                objcheck.WorkedHours = total_hours_worked(objcheck);
+                var WorkedHour = total_hours_worked(objcheck);
+                objcheck.WorkedHours = WorkedHour;
                 _baseRepository.Update(objcheck);
+                if (WorkedHour > 8)
+                {
+                    dashboardCheck.Balance = dashboardCheck.Balance + (WorkedHour - dashboardCheck.Workload);
+                    _baseDashboardRepository.Update(dashboardCheck);
+                }
+                else if (WorkedHour < 8)
+                {
+                    dashboardCheck.Balance = dashboardCheck.Balance - (dashboardCheck.Workload - WorkedHour);
+                    _baseDashboardRepository.Update(dashboardCheck);
+                }
                 return _mapper.Map<SchedulesViewModel>(objcheck);
             }
         }
@@ -78,9 +96,9 @@ namespace Service.Services
             if (objcheck == null)
             {
 
-                var objViewModel = new SchedulesViewModel() { CollaboratorId = idUser, Entry = DateTime.Now };
-                var obj = _mapper.Map<Schedules>(objViewModel);
-                _baseRepository.Insert(obj);
+                var objViewModel = new SchedulesViewModel() { CollaboratorId = idUser, Entry = DateTime.Parse("0001-01-01T00:00:00") };
+                //var obj = _mapper.Map<Schedules>(objViewModel);
+                //_baseRepository.Insert(obj);
 
                 return objViewModel;
             }
@@ -92,13 +110,14 @@ namespace Service.Services
 
         public IEnumerable<SchedulesViewModel> GetLast7Days(int idUser)
         {
-            var pastDate = DateTime.Now.AddDays(-6);
-            var today = DateTime.Now;
             var obj = _schedulesRepository.GetSchedulesByUserId(idUser);
-            var dashboarddates = obj.Where(Schedule => Schedule.Entry.Date <= today && Schedule.Entry.Date >= pastDate).ToList();
+            var dashboarddates = obj
+                .Where(Schedule => Schedule.Entry.Date <= DateTime.Now && Schedule.Entry.Date >= DateTime.Now.AddDays(-7))
+                .ToList();
             var objviewmodel = _mapper.Map<IEnumerable<SchedulesViewModel>>(dashboarddates);
             return objviewmodel;
         }
+
         public double total_hours_worked(Schedules obj)
         {
             TimeSpan result;
@@ -110,7 +129,9 @@ namespace Service.Services
         public double balanceHours(int idUser)
         {
             var obj = _schedulesRepository.GetSchedulesByUserId(idUser);
-            var workedHours = obj.Where(Schedules => Schedules.WorkedHours != null).ToList();
+            var workedHours = obj
+                .Where(Schedules => Schedules.WorkedHours != null)
+                .ToList();
             double balance = 0;
 
             foreach (var hour in workedHours)
@@ -125,6 +146,13 @@ namespace Service.Services
                 }
             }
             return balance;
+        }
+
+        public IEnumerable<SchedulesViewModel> GetAllByCollaboratorIdAndYearAndMonth(int id, int year, int month)
+        {
+            var obj = _schedulesRepository.GetAllScheduleByCollaboratorIdByMonthAndYear(id, year, month);
+            var objviewmodel = _mapper.Map<IEnumerable<SchedulesViewModel>>(obj);
+            return objviewmodel;
         }
     }
 }

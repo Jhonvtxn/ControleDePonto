@@ -58,34 +58,6 @@ namespace WebAPI.Controllers
             return Execute(() => _baseSchedulesService.Add<SchedulesValidator>(schedule).Id);
         }
 
-        [HttpPost]
-        [Route("AutoSchedule")]
-        public IActionResult AutoSchedule(int id, int adtype)
-        {
-            var auto_schedule = new Schedules();
-            auto_schedule.CollaboratorId = id;
-
-            if (adtype == 1)
-            {
-                auto_schedule.Entry = DateTime.Now;
-                
-            }
-            else if (adtype == 2)
-            {
-                auto_schedule.LunchTime = DateTime.Now;
-            }
-            else if (adtype == 3)
-            {
-                auto_schedule.ReturnLunchTime = DateTime.Now;
-            }
-            else {
-
-                auto_schedule.DepartureTime = DateTime.Now;
-                
-            }
-            return Execute(() => _baseSchedulesService.Add<SchedulesValidator>(auto_schedule).Id);
-        }
-
         [HttpGet]
         public IActionResult Get()
         {
@@ -114,7 +86,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("CollaboratorSchedules")]
+        [Route("CollaboratorSchedules/{id}")]
         public IActionResult GetSchedulesByUser(int id)
         {
             if (id == 0)
@@ -152,6 +124,18 @@ namespace WebAPI.Controllers
 
             return Execute(() => _Schedulesservice.balanceHours(id));
         }
+
+        [HttpGet]
+        [Route("CollaboratorSchedulesByMonthAndYear")]
+        public IActionResult GetSchedulesByCollaboratorId([FromQuery] int id, [FromQuery] int year, [FromQuery] int month)
+        {
+            if (id == 0)
+                return NotFound();
+            month = month + 1;
+
+            return Execute(() => _Schedulesservice.GetAllByCollaboratorIdAndYearAndMonth(id, year, month));
+        }
+
         private IActionResult Execute(Func<object> func)
         {
             try

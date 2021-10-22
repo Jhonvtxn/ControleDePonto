@@ -15,9 +15,12 @@ namespace Data.Repository
         public CollaboratorRepository(SqlContext context) : base(context)
         {
         }
+
         public IEnumerable<Collaborator> GetAll()
         {
-            var obj = CurrentSet.Include(x => x.Company).ToList();
+            var obj = CurrentSet
+                .Include(x => x.Company)
+                .ToList();
             return obj;
         }
         public Collaborator GetAllAuthentication(string emailAut, string passwordAut)
@@ -25,6 +28,23 @@ namespace Data.Repository
             var obj = CurrentSet
                        .Where(x => x.Email == emailAut && x.Password == passwordAut)
                        .First();
+            return obj;
+        }
+
+        public Collaborator GetById(int id)
+        {
+            var obj = CurrentSet
+                .Include(x => x.Company)
+                .FirstOrDefault();
+            return obj;
+        }
+
+        public IEnumerable<Collaborator> GetByCompanyId(int idCompany)
+        {
+            var obj = CurrentSet
+                          .Include(x => x.Company)
+                          .Where(x => x.CompanyId == idCompany).ToList();
+
             return obj;
         }
     }

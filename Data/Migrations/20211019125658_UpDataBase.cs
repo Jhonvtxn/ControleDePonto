@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Migrations
 {
-    public partial class DbControleDePonto : Migration
+    public partial class UpDataBase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -52,6 +52,54 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Dashboard",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CollaboratorId = table.Column<int>(type: "int", nullable: false),
+                    Workload = table.Column<int>(type: "varchar(100)", nullable: false),
+                    Balance = table.Column<double>(type: "varchar(20)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Dashboard", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Dashboard_Collaborator_CollaboratorId",
+                        column: x => x.CollaboratorId,
+                        principalTable: "Collaborator",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "HappyFridays",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CollaboratorId = table.Column<int>(type: "int", nullable: false),
+                    CompanyId = table.Column<int>(type: "int", nullable: false),
+                    HappyFridayDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HappyFridays", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_HappyFridays_Collaborator_CollaboratorId",
+                        column: x => x.CollaboratorId,
+                        principalTable: "Collaborator",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_HappyFridays_Company_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Company",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Schedules",
                 columns: table => new
                 {
@@ -61,7 +109,7 @@ namespace Data.Migrations
                     LunchTime = table.Column<DateTime>(name: "Lunch Time", type: "varchar(100)", nullable: false),
                     LunchReturnTime = table.Column<DateTime>(name: "Lunch Return Time", type: "varchar(100)", nullable: false),
                     DepartureTime = table.Column<DateTime>(name: "Departure Time", type: "varchar(100)", nullable: false),
-                    WorkedHours = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    WorkedHours = table.Column<double>(type: "float", nullable: false),
                     CollaboratorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -81,6 +129,21 @@ namespace Data.Migrations
                 column: "CompanyId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Dashboard_CollaboratorId",
+                table: "Dashboard",
+                column: "CollaboratorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HappyFridays_CollaboratorId",
+                table: "HappyFridays",
+                column: "CollaboratorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HappyFridays_CompanyId",
+                table: "HappyFridays",
+                column: "CompanyId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Schedules_CollaboratorId",
                 table: "Schedules",
                 column: "CollaboratorId");
@@ -88,6 +151,12 @@ namespace Data.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Dashboard");
+
+            migrationBuilder.DropTable(
+                name: "HappyFridays");
+
             migrationBuilder.DropTable(
                 name: "Schedules");
 

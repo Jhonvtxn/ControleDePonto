@@ -25,5 +25,15 @@ namespace Data.Repository
 
             return obj;
         }
+
+        public Dashboard Get_InformationCollaborator(int idUser)
+        {
+            var obj = CurrentSet
+                .Include(x => x.Collaborator)
+                .Where(x => x.CollaboratorId == idUser)
+                .ToList()
+                .FirstOrDefault();
+            return obj;
+        }
     }
 }

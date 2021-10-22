@@ -14,7 +14,7 @@ namespace Data.Mapping
         public void Configure(EntityTypeBuilder<Dashboard> builder)
         {
 
-            builder.ToTable("Dasboard");
+            builder.ToTable("Dashboard");
 
             builder.HasKey(prop => prop.Id);
 

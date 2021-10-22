@@ -53,5 +53,14 @@ namespace Data.Repository
             return result.Hours;
 
         }
+
+        public IEnumerable<Schedules> GetAllScheduleByCollaboratorIdByMonthAndYear(int id, int year, int month)
+        {
+            var obj = CurrentSet.AsNoTracking()
+                .Include(x => x.Collaborator)
+                .Where(x => x.Collaborator.Id == id && (x.Entry.Month == month && x.Entry.Year == year)).ToList();
+
+            return obj;
+        }
     }
 }

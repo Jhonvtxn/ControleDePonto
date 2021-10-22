@@ -11,5 +11,9 @@ namespace Domain.Interfaces
     {
         IEnumerable<Collaborator> GetAll();
         Collaborator GetAllAuthentication(string emailAut, string PasswordAut);
+
+        Collaborator GetById(int id);
+
+        IEnumerable<Collaborator> GetByCompanyId(int idCompany);
     }
 }

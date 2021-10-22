@@ -9,14 +9,15 @@ namespace Service.ViewModels
 {
     public class DashboardViewModel
     {
+        public int CollaboratorId { get; set; }
+
+        public Collaborator Collaborator { get; set; }
+
         public int Workload { get; set; }
 
         public double Balance { get; set; }
 
-        public IEnumerable<Schedules> Lasthours { get; set; }
+        public IEnumerable<SchedulesViewModel> Lasthours7Days { get; set; }  
 
-        public int CollaboratorId { get; set; }
-
-        public Collaborator Collaborator { get; set; }
     }
 }
