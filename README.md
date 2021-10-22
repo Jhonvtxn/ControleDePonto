@@ -9,16 +9,19 @@ Mentoria Lead Mentoring
 
 Esse projeto foi desenvolvido com as seguintes tecnologias:
 
-- [C#]
-- [Entity FrameWork]
-- [Sql Server]
-- [FluentValidator]
-- [Swagger]
-- [JWT]
-- [AutoMapper]
+- C#
+- Entity FrameWork
+- Sql Server
+- FluentValidator
+- Swagger
+- JWT
+- AutoMapper
 
-## 💻 Projeto
 
-O projeto consiste em um sistema responsável por registrar a jornada de trabalho dos funcionários,
-e extrair informações como quantidade de horas extras, faltas e marcar folgas. Na aplicação foi utilizado
-uma arquitetura em DDD. foi utilizado JWT para autenticar a Api.
+## Contact
+
+Jhonatan De Sousa Carvalho - [@your_twitter](https://twitter.com/your_username) - email@example.com
+
+Project Link: [https://github.com/Jhonvtxn/ControleDePonto](https://github.com/Jhonvtxn/ControleDePonto)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
