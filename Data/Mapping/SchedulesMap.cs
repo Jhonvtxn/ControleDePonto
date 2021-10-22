@@ -19,25 +19,21 @@ namespace Data.Mapping
 
             builder.Property(prop => prop.Entry)
             .HasConversion(prop => prop, prop => prop)
-            //.IsRequired()
             .HasColumnName("Entry Time")
             .HasColumnType("varchar(100)");
 
             builder.Property(prop => prop.LunchTime)
             .HasConversion(prop => prop, prop => prop)
-            //.IsRequired()
             .HasColumnName("Lunch Time")
             .HasColumnType("varchar(100)");
 
             builder.Property(prop => prop.ReturnLunchTime)
             .HasConversion(prop => prop, prop => prop)
-            //.IsRequired()
             .HasColumnName("Lunch Return Time")
             .HasColumnType("varchar(100)");
 
             builder.Property(prop => prop.DepartureTime)
             .HasConversion(prop => prop, prop => prop)
-            //.IsRequired()
             .HasColumnName("Departure Time")
             .HasColumnType("varchar(100)");
         }

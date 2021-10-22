@@ -19,7 +19,6 @@ namespace Domain.Entities
         public double WorkedHours { get; set; }
 
         public int CollaboratorId { get; set; }
-
         public Collaborator Collaborator { get; set; }
     }
 }

@@ -17,9 +17,6 @@ namespace Data.Repository
 
         }
 
-
-        //TrocarNome e tirar o toList e o First
-
         public HappyFriday GetHappyFridayByYearAndMonthAndUserId(int idUser, int year, int month)
         {
             var obj = CurrentSet.AsNoTracking()

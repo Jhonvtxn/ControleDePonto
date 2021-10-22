@@ -20,13 +20,11 @@ namespace Data.Mapping
 
             builder.Property(prop => prop.Workload)
                 .HasConversion(prop => prop, prop => prop)
-                //.IsRequired()
                 .HasColumnName("Workload")
                 .HasColumnType("varchar(100)");
 
             builder.Property(prop => prop.Balance)
                .HasConversion(prop => prop, prop => prop)
-               //.IsRequired()
                .HasColumnName("Balance")
                .HasColumnType("varchar(20)");
         }
