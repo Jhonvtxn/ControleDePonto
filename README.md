@@ -20,8 +20,6 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## Contact
 
-Jhonatan De Sousa Carvalho - [@your_twitter](https://twitter.com/your_username) - email@example.com
+Jhonatan De Sousa Carvalho - jhonatancarv0@gmail.com
 
 Project Link: [https://github.com/Jhonvtxn/ControleDePonto](https://github.com/Jhonvtxn/ControleDePonto)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
