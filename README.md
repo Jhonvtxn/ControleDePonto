@@ -28,8 +28,7 @@ uma arquitetura em DDD. Foi utulizado JWT para autenticar a Api.
 Necessário rodar no console do Gerenciador de Pacotes na camada de Data:
 - Add-Migration FirstMigration
 - Update-Database
-<br>
-- Documentação dos codigos acima:[https://docs.microsoft.com/pt-br/ef/core/cli/powershell](https://docs.microsoft.com/pt-br/ef/core/cli/powershell)
+- Saiba mais Sobres os codigos acima: [https://docs.microsoft.com/pt-br/ef/core/cli/powershell](https://docs.microsoft.com/pt-br/ef/core/cli/powershell)
 
 ## Contato
 
