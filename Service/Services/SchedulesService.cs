@@ -20,6 +20,7 @@ namespace Service.Services
         private readonly IBaseRepository<Dashboard> _baseDashboardRepository;
         private readonly IDashboardRepository _dashboardRepository;
         
+
         public SchedulesService(ISchedulesRepository schedulesRepository, IMapper mapper, IBaseRepository<Schedules> baseRepository, IDashboardRepository dashboardRepository,
              IBaseRepository<Dashboard> baseDashboardRepository)
         {
