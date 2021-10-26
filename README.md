@@ -31,7 +31,7 @@ Necessário rodar no console do Gerenciador de Pacotes na camada de Data:
 - Saiba mais sobres os codigos acima: [https://docs.microsoft.com/pt-br/ef/core/cli/powershell](https://docs.microsoft.com/pt-br/ef/core/cli/powershell)
 
 ### Contato
-
-Jhonatan De Sousa Carvalho - jhonatancarv0@gmail.com
+- Jhonatan De Sousa Carvalho - jhonatancarv0@gmail.com
+- [Meu Linkedin](https://www.linkedin.com/in/jhonvtan/)
 
 Project Link: [https://github.com/Jhonvtxn/ControleDePonto](https://github.com/Jhonvtxn/ControleDePonto)
